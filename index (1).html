@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sneakers Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body>
+
+<!-- მობულურის მენიუ-->
+<div class="overlay" id="overlay"></div>
+
+<!-- მობილურის ნავიგაცია -->
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="closeNav" aria-label="Close menu">
+    <svg width="14" height="15" viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.596.782l1.818 1.818L8.414 7l4.99 4.996-1.818 1.818L6.596 8.818l-4.99 4.99L-.212 11.99l4.99-4.996L-.212 1.99 1.606.175l4.99 4.99L11.596.782z" fill="#69707D" fill-rule="evenodd"/>
+    </svg>
+  </button>
+  <a href="#">Collections</a>
+  <a href="#">Men</a>
+  <a href="#">Women</a>
+  <a href="#">About</a>
+  <a href="#">Contact</a>
+</nav>
+
+<!-- ჰედერი -->
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <button class="burger-btn" id="burgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#" class="logo">sneakers<span>.</span></a>
+      <nav class="desktop-nav">
+        <a href="#">Collections</a>
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <!-- კალათას ღილაკი -->
+      <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+        <svg viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1.181l2.304 13.493a3.155 3.155 0 0 0 2.298 10.174 3.155 3.155 0 1 0 2.717-4.718 3.155 3.155 0 0 0-1.918.67l-.266-1.558h9.426a.896.896 0 0 0 .876-.696l1.77-7.962a.896.896 0 0 0-.873-1.108zm-6.715 8.917H7.506l-1.292-7.53h10.34l-1.344 7.53zM8.586 17.413a1.363 1.363 0 1 1-2.726 0 1.363 1.363 0 0 1 2.726 0zm6.706 0a1.363 1.363 0 1 1-2.726 0 1.363 1.363 0 0 1 2.726 0z" fill-rule="nonzero"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+
+      <!-- ავატარი -->
+      <button class="avatar-btn" aria-label="Account">
+        <img src=images/
+             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 50 50%22><circle cx=%2225%22 cy=%2225%22 r=%2225%22 fill=%22%23FF7D1A%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22white%22>A</text></svg>'"
+             alt="Avatar"/>
+      </button>
+    </div>
+  </div>
+
+  <!-- კალათას დროპდაუნი -->
+  <div class="cart-dropdown" id="cartDropdown">
+    <h3>Cart</h3>
+    <div class="cart-body" id="cartBody">
+      <p class="cart-empty">Your cart is empty.</p>
+    </div>
+  </div>
+</header>
+
+<!-- მთავარი შიგთავსი -->
+<main>
+
+  <!-- მობილურის სურათებიიიიი -->
+  <section class="gallery-mobile" aria-label="Product images">
+    <div class="mobile-track" id="mobileTrack">
+      <img src="images/image-product-1.jpg"
+           onerror="this.src='https://via.placeholder.com/500x400/FF7D1A/ffffff?text=Sneaker+1'" alt="Product 1"/>
+      <img src="images/image-product-2.jpg"
+           onerror="this.src='https://via.placeholder.com/500x400/FF9A50/ffffff?text=Sneaker+2'" alt="Product 2"/>
+      <img src="images/image-product-3.jpg"
+           onerror="this.src='https://via.placeholder.com/500x400/FFAB6A/ffffff?text=Sneaker+3'" alt="Product 3"/>
+      <img src="images/image-product-4.jpg"
+           onerror="this.src='https://via.placeholder.com/500x400/FFBC85/ffffff?text=Sneaker+4'" alt="Product 4"/>
+    </div>
+    <button class="gallery-arrow prev" id="mobilePrev" aria-label="Previous image">
+      <svg width="12" height="18" viewBox="0 0 12 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 1L3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="gallery-arrow next" id="mobileNext" aria-label="Next image">
+      <svg width="12" height="18" viewBox="0 0 12 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1l8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </section>
+
+  <!-- ლეპტოპის სურათებიიი -->
+  <section class="gallery-desktop" aria-label="Product images">
+    <div class="gallery-main-img" id="desktopMainImg">
+      <img id="desktopMainImgEl" src="images/image-product-1.jpg"
+           onerror="this.src='https://via.placeholder.com/500x400/FF7D1A/ffffff?text=Sneaker+1'" alt="Main product"/>
+    </div>
+    <div class="gallery-thumbs">
+      <div class="thumb active" data-index="0">
+        <img src="images/image-product-1-thumbnail.jpg"
+             onerror="this.src='https://via.placeholder.com/120x100/FF7D1A/ffffff?text=1'" alt="Thumb 1"/>
+      </div>
+      <div class="thumb" data-index="1">
+        <img src="images/image-product-2-thumbnail.jpg"
+             onerror="this.src='https://via.placeholder.com/120x100/FF9A50/ffffff?text=2'" alt="Thumb 2"/>
+      </div>
+      <div class="thumb" data-index="2">
+        <img src="images/image-product-3-thumbnail.jpg"
+             onerror="this.src='https://via.placeholder.com/120x100/FFAB6A/ffffff?text=3'" alt="Thumb 3"/>
+      </div>
+      <div class="thumb" data-index="3">
+        <img src="images/image-product-4-thumbnail.jpg"
+             onerror="this.src='https://via.placeholder.com/120x100/FFBC85/ffffff?text=4'" alt="Thumb 4"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ინფო -->
+  <section class="product-info">
+    <p class="product-brand">Sneaker Company</p>
+    <h1 class="product-title">Fall Limited Edition Sneakers</h1>
+    <p class="product-desc">
+      These low-profile sneakers are your perfect casual wear companion.
+      Featuring a durable rubber outer sole, they'll withstand everything
+      the weather can offer.
+    </p>
+
+    <div class="price-row">
+      <div class="price-left">
+        <span class="current-price">$125.00</span>
+        <span class="discount-badge">50%</span>
+      </div>
+      <span class="original-price">$250.00</span>
+    </div>
+
+    <div class="purchase-row">
+      <div class="qty-control">
+        <button class="qty-btn" id="qtyMinus" aria-label="Decrease quantity">−</button>
+        <span class="qty-value" id="qtyValue">0</span>
+        <button class="qty-btn" id="qtyPlus" aria-label="Increase quantity">+</button>
+      </div>
+      <button class="btn-add-cart" id="addToCartBtn">
+        <svg viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1.181l2.304 13.493a3.155 3.155 0 0 0 2.298 10.174 3.155 3.155 0 1 0 2.717-4.718 3.155 3.155 0 0 0-1.918.67l-.266-1.558h9.426a.896.896 0 0 0 .876-.696l1.77-7.962a.896.896 0 0 0-.873-1.108zm-6.715 8.917H7.506l-1.292-7.53h10.34l-1.344 7.53zM8.586 17.413a1.363 1.363 0 1 1-2.726 0 1.363 1.363 0 0 1 2.726 0zm6.706 0a1.363 1.363 0 1 1-2.726 0 1.363 1.363 0 0 1 2.726 0z" fill-rule="nonzero"/>
+        </svg>
+        Add to cart
+      </button>
+    </div>
+  </section>
+</main>
+
+<!-- ლიგითბოქსი -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+      <svg width="14" height="15" viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.596.782l1.818 1.818L8.414 7l4.99 4.996-1.818 1.818L6.596 8.818l-4.99 4.99L-.212 11.99l4.99-4.996L-.212 1.99 1.606.175l4.99 4.99L11.596.782z" fill-rule="evenodd"/>
+      </svg>
+    </button>
+    <div class="lightbox-main" style="position:relative;">
+      <img id="lightboxImg" src="" alt="Product large view"/>
+      <button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous">
+        <svg width="12" height="18" viewBox="0 0 12 18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 1L3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="lightbox-arrow next" id="lightboxNext" aria-label="Next">
+        <svg width="12" height="18" viewBox="0 0 12 18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1l8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+  </div>
+</div>
+ <script src="script.js"></script>
+</body>
+</html>

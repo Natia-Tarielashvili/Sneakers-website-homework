@@ -1,0 +1,432 @@
+/* ===== რესეტ ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: hsl(26, 100%, 55%);
+      --pale-orange: hsl(25, 100%, 94%);
+      --dark-blue: hsl(220, 13%, 13%);
+      --dark-grayish-blue: hsl(219, 9%, 45%);
+      --grayish-blue: hsl(220, 14%, 75%);
+      --light-grayish-blue: hsl(223, 64%, 98%);
+      --white: hsl(0, 0%, 100%);
+      --black-overlay: hsla(0, 0%, 0%, 0.75);
+    }
+
+    body {
+      font-family: 'Kumbh Sans', sans-serif;
+      background: var(--white);
+      color: var(--dark-blue);
+    }
+
+    /* ===== ოვერლაი ===== */
+    .overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--black-overlay);
+      z-index: 100;
+    }
+    .overlay.active { display: block; }
+
+    /* ===== ჰედერი ===== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      border-bottom: 1px solid var(--grayish-blue);
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 768px) {
+      header { padding: 0 40px; height: 112px; max-width: 1160px; margin: 0 auto; border-bottom: 1px solid var(--grayish-blue); }
+      body > header { max-width: 100%; padding: 0; }
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      height: 100%;
+      border-bottom: 1px solid var(--grayish-blue);
+      padding: 0 24px;
+    }
+
+    @media (min-width: 768px) {
+      header { padding: 0; border-bottom: none; height: 112px; }
+      .header-inner { padding: 0 40px; }
+    }
+
+    .header-left { display: flex; align-items: center; gap: 18px; }
+
+    /* სამი ხაზი */
+    .burger-btn {
+      background: none; border: none; cursor: pointer;
+      display: flex; flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .burger-btn span {
+      display: block; width: 24px; height: 2px;
+      background: var(--dark-blue); border-radius: 2px;
+    }
+    @media (min-width: 768px) { .burger-btn { display: none; } }
+
+    /* ლოგო */
+    .logo { font-size: 28px; font-weight: 700; letter-spacing: -1px; color: var(--dark-blue); text-decoration: none; }
+    .logo span { color: var(--orange); }
+
+    /* დეკსტოპ ნავიგაცია */
+    nav.desktop-nav { display: none; }
+    @media (min-width: 768px) {
+      nav.desktop-nav {
+        display: flex; gap: 32px; margin-left: 48px;
+        height: 100%; align-items: center;
+      }
+      nav.desktop-nav a {
+        text-decoration: none; color: var(--dark-grayish-blue);
+        font-size: 15px; position: relative; height: 100%;
+        display: flex; align-items: center;
+        transition: color 0.2s;
+      }
+      nav.desktop-nav a::after {
+        content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+        height: 4px; background: var(--orange);
+        transform: scaleX(0); transition: transform 0.2s;
+      }
+      nav.desktop-nav a:hover { color: var(--dark-blue); }
+      nav.desktop-nav a:hover::after { transform: scaleX(1); }
+    }
+
+    /* ჰედერი */
+    .header-right { display: flex; align-items: center; gap: 18px; }
+    @media (min-width: 768px) { .header-right { gap: 24px; } }
+
+    /* კალათა */
+    .cart-btn {
+      background: none; border: none; cursor: pointer;
+      position: relative; padding: 4px;
+      display: flex; align-items: center;
+    }
+    .cart-btn svg { width: 22px; height: 20px; }
+    .cart-btn svg path { fill: var(--dark-grayish-blue); transition: fill 0.2s; }
+    .cart-btn:hover svg path { fill: var(--dark-blue); }
+
+    .cart-count {
+      position: absolute; top: -4px; right: -4px;
+      background: var(--orange); color: var(--white);
+      font-size: 10px; font-weight: 700;
+      min-width: 18px; height: 18px;
+      border-radius: 9px; display: flex;
+      align-items: center; justify-content: center;
+      padding: 0 5px;
+      display: none;
+    }
+    .cart-count.visible { display: flex; }
+
+    /* ავატარი */
+    .avatar-btn {
+      background: none; border: none; cursor: pointer;
+      border-radius: 50%; border: 2px solid transparent;
+      transition: border-color 0.2s; padding: 0;
+    }
+    .avatar-btn:hover { border-color: var(--orange); }
+    .avatar-btn img { width: 36px; height: 36px; border-radius: 50%; display: block; }
+    @media (min-width: 768px) { .avatar-btn img { width: 50px; height: 50px; } }
+
+    /* ===== საიდბარი ===== */
+    .mobile-nav {
+      position: fixed; top: 0; left: -280px;
+      width: 250px; height: 100vh;
+      background: var(--white); z-index: 200;
+      transition: left 0.3s ease;
+      padding: 24px;
+    }
+    .mobile-nav.open { left: 0; }
+
+    .mobile-nav-close {
+      background: none; border: none; cursor: pointer;
+      margin-bottom: 40px; padding: 4px;
+    }
+    .mobile-nav-close svg { width: 16px; height: 18px; }
+
+    .mobile-nav a {
+      display: block; text-decoration: none;
+      color: var(--dark-blue); font-weight: 700;
+      font-size: 18px; margin-bottom: 20px;
+    }
+    .mobile-nav a:hover { color: var(--orange); }
+
+    /* ===== კალათას ჩამოშლა ===== */
+    .cart-dropdown {
+      display: none;
+      position: absolute; top: 80px; right: 16px;
+      width: 360px; background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px -20px rgba(29,32,38,0.5);
+      z-index: 50;
+      overflow: hidden;
+    }
+    .cart-dropdown.open { display: block; }
+    @media (min-width: 768px) { .cart-dropdown { top: 100px; right: 40px; } }
+
+    .cart-dropdown h3 {
+      padding: 24px; font-size: 16px; font-weight: 700;
+      border-bottom: 1px solid var(--grayish-blue);
+    }
+
+    .cart-body { padding: 24px; min-height: 80px; }
+
+    .cart-empty {
+      color: var(--dark-grayish-blue); font-weight: 700;
+      text-align: center; padding: 32px 0;
+    }
+
+    .cart-items { display: flex; flex-direction: column; gap: 18px; }
+
+    .cart-item {
+      display: flex; align-items: center; gap: 18px;
+    }
+    .cart-item img {
+      width: 50px; height: 50px; border-radius: 4px; flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { color: var(--dark-grayish-blue); font-size: 15px; }
+    .cart-item-price { color: var(--dark-grayish-blue); font-size: 15px; }
+    .cart-item-price strong { color: var(--dark-blue); font-weight: 700; }
+
+    .cart-item-remove {
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .cart-item-remove:hover svg path { fill: var(--dark-blue); }
+    .cart-item-remove svg path { fill: var(--dark-grayish-blue); }
+
+    .btn-checkout {
+      display: block; width: 100%;
+      background: var(--orange); color: var(--white);
+      border: none; border-radius: 12px;
+      font-family: 'Kumbh Sans', sans-serif;
+      font-size: 16px; font-weight: 700;
+      padding: 18px; cursor: pointer;
+      margin-top: 24px;
+      transition: background 0.2s;
+    }
+    .btn-checkout:hover { background: hsl(26, 100%, 65%); }
+
+    /* ===== მთავარი ===== */
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 0 80px;
+    }
+    @media (min-width: 768px) {
+      main {
+        padding: 80px 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+    }
+
+    /* ===== სურათები მობილურისთვის ===== */
+    .gallery-mobile {
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) { .gallery-mobile { display: none; } }
+
+    .mobile-track {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-track img {
+      width: 100%; flex-shrink: 0;
+    }
+
+    .gallery-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--white); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 5;
+    }
+    .gallery-arrow.prev { left: 16px; }
+    .gallery-arrow.next { right: 16px; }
+    .gallery-arrow:hover svg path { stroke: var(--orange); }
+
+    /* ===== სურათები დექსტოპისთვი ===== */
+    .gallery-desktop { display: none; }
+    @media (min-width: 768px) {
+      .gallery-desktop {
+        display: flex; flex-direction: column; gap: 24px;
+      }
+    }
+
+    .gallery-main-img {
+      border-radius: 15px; overflow: hidden; cursor: pointer;
+    }
+    .gallery-main-img img { width: 100%; display: block; transition: opacity 0.2s; }
+    .gallery-main-img:hover img { opacity: 0.85; }
+
+    .gallery-thumbs {
+      display: flex; gap: 18px;
+    }
+    .thumb {
+      border-radius: 10px; overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer; flex: 1;
+      transition: border-color 0.2s;
+      position: relative;
+    }
+    .thumb::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.6);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .thumb.active { border-color: var(--orange); }
+    .thumb.active::after { opacity: 1; }
+    .thumb:hover::after { opacity: 0.5; }
+    .thumb img { width: 100%; display: block; }
+
+    /* ===== ლაითბოქს მოდელი ===== */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      z-index: 300;
+      background: var(--black-overlay);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+
+    .lightbox-inner {
+      width: 100%; max-width: 550px;
+      position: relative;
+      padding: 0 16px;
+    }
+
+    .lightbox-close {
+      position: absolute; top: -48px; right: 16px;
+      background: none; border: none; cursor: pointer;
+    }
+    .lightbox-close svg path { fill: var(--white); }
+    .lightbox-close:hover svg path { fill: var(--orange); }
+
+    .lightbox-main {
+      border-radius: 15px; overflow: hidden;
+      margin-bottom: 24px; position: relative;
+    }
+    .lightbox-main img { width: 100%; display: block; }
+
+    .lightbox-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--white); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-arrow.prev { left: -24px; }
+    .lightbox-arrow.next { right: -24px; }
+    .lightbox-arrow:hover svg path { stroke: var(--orange); }
+
+    .lightbox-thumbs { display: flex; gap: 18px; justify-content: center; }
+    .lightbox-thumb {
+      border-radius: 10px; overflow: hidden;
+      border: 2px solid transparent; cursor: pointer;
+      width: 80px; position: relative;
+    }
+    .lightbox-thumb::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.6); opacity: 0; transition: opacity 0.2s;
+    }
+    .lightbox-thumb.active { border-color: var(--orange); }
+    .lightbox-thumb.active::after { opacity: 1; }
+    .lightbox-thumb img { width: 100%; display: block; }
+
+    /* ===== პროდუქტის ინფო ===== */
+    .product-info { padding: 24px; }
+    @media (min-width: 768px) { .product-info { padding: 0; } }
+
+    .product-brand {
+      font-size: 13px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .product-title {
+      font-size: 28px; font-weight: 700; line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) { .product-title { font-size: 44px; margin-bottom: 32px; } }
+
+    .product-desc {
+      color: var(--dark-grayish-blue); font-size: 15px; line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .price-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) { .price-row { flex-direction: column; align-items: flex-start; gap: 8px; } }
+
+    .price-left { display: flex; align-items: center; gap: 18px; }
+
+    .current-price { font-size: 28px; font-weight: 700; }
+
+    .discount-badge {
+      background: var(--pale-orange); color: var(--orange);
+      font-size: 16px; font-weight: 700;
+      padding: 4px 10px; border-radius: 6px;
+    }
+
+    .original-price {
+      color: var(--grayish-blue); font-weight: 700;
+      font-size: 16px; text-decoration: line-through;
+    }
+
+    /* კალათაში დამატება, რაოდენობა */
+    .purchase-row {
+      display: flex; gap: 18px;
+    }
+    @media (max-width: 767px) { .purchase-row { flex-direction: column; } }
+
+    .qty-control {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--light-grayish-blue);
+      border-radius: 10px; padding: 16px 20px;
+      min-width: 150px;
+    }
+    @media (min-width: 768px) { .qty-control { flex: 1; } }
+
+    .qty-btn {
+      background: none; border: none; cursor: pointer;
+      font-size: 24px; font-weight: 700;
+      color: var(--orange); padding: 0 4px;
+      line-height: 1; transition: opacity 0.2s;
+    }
+    .qty-btn:hover { opacity: 0.6; }
+
+    .qty-value { font-size: 16px; font-weight: 700; }
+
+    .btn-add-cart {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      gap: 12px;
+      background: var(--orange); color: var(--white);
+      border: none; border-radius: 10px;
+      font-family: 'Kumbh Sans', sans-serif;
+      font-size: 16px; font-weight: 700;
+      padding: 18px 32px; cursor: pointer;
+      box-shadow: 0 20px 50px -20px var(--orange);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-add-cart:hover {
+      background: hsl(26, 100%, 65%);
+      box-shadow: 0 20px 50px -10px var(--orange);
+    }
+    .btn-add-cart svg { width: 18px; height: 18px; }
+    .btn-add-cart svg path { fill: var(--white); }
